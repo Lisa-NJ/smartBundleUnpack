@@ -68,7 +68,7 @@ public class Bundle {
 
         try {
             //add fileHandler
-            FileHandler fileHandler = new FileHandler("log/logBuddle" + getTypeB() + ".log");
+            FileHandler fileHandler = new FileHandler("log/logBundle" + getTypeB() + ".log");
             fileHandler.setLevel(Level.INFO); 
             fileHandler.setFormatter(new MyFormat());
 
