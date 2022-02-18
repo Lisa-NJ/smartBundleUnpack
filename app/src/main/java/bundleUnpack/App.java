@@ -5,9 +5,6 @@ package bundleUnpack;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /** Given a brands order, determine the cost and bundle breakdown for each submission format.
@@ -29,38 +26,18 @@ import java.util.logging.Logger;
 public class App{
 
     public static void main(String[] args) {
-        
-        Logger logger = Logger.getLogger("LoggerLog");
 
-        logger.setLevel(Level.INFO);
-
-        try {
-            //add fileHandler
-            FileHandler fileHandler = new FileHandler("log/logMain.log");
-            fileHandler.setLevel(Level.INFO); 
-            fileHandler.setFormatter(new MyFormat());
-
-            //add fileHandler to logger
-            logger.addHandler(fileHandler);
-            
-        } catch (SecurityException | IOException e) {
-            e.printStackTrace();
-        }
- 
         //用配置文件名称 初始化 Bundles 对象
         BundleS bs = new BundleS("cfg/setBundles.cfg");
-        logger.info("从文件 setBundles.log 获取：产品类型 及 Bundle 分包价格 信息");
-       
+        
         HashMap<String, Integer> targetNums = new HashMap<String, Integer>();
         //添加键值对
         targetNums.put("IMG", 10);
         targetNums.put("FLAC", 15);
-        targetNums.put("VID", 4);
+        targetNums.put("VID", 13);
 
         targetNums.forEach((key, value) -> {
-            logger.info("\t下单：" + key + " " + value + " 件");
-            double prc = bs.placeOrder(key, value);
-            logger.info("\t----花费：" + prc);
+            DivideBundle ddBundle = bs.placeOrder(key, value);
         });
     }
 }

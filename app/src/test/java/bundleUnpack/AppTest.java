@@ -17,5 +17,9 @@ public class AppTest {
     @Test public void testBundlesInit() {
         BundleS classUnderTest = new BundleS("cfg/setBundles.cfg");
         assert(classUnderTest.initBundles()==3);
+
+        assert(classUnderTest.placeOrder("IMG", 2).getTotalPrice() < 450+1);
+
+        //...继续测试其他 方法 
     }
 }
