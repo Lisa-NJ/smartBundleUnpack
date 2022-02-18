@@ -1,0 +1,39 @@
+INFO: 2022-02-18 22:39:32 757 ------ Bundle 对象初始化 length=3 ------
+INFO: 2022-02-18 22:39:32 758 	一共有 3 种规格：
+INFO: 2022-02-18 22:39:32 759 	 3 - 570.0
+INFO: 2022-02-18 22:39:32 761 	 5 - 900.0
+INFO: 2022-02-18 22:39:32 762 	 9 - 1530.0
+INFO: 2022-02-18 22:39:32 763 ---- VID 类型的 initBase，初始化 num-cost Map ----
+INFO: 2022-02-18 22:39:32 764 	3 = 给定规格，cost= 570.0
+INFO: 2022-02-18 22:39:32 765 	5 = 给定规格，cost= 900.0
+INFO: 2022-02-18 22:39:32 772 	9 = 给定规格，cost= 1530.0
+INFO: 2022-02-18 22:39:32 773 	1 < 最小规格 3 cost= 570.0
+INFO: 2022-02-18 22:39:32 775 	2 < 最小规格 3 cost= 570.0
+INFO: 2022-02-18 22:39:32 781 	计算介于之间的其他值
+INFO: 2022-02-18 22:39:32 781 ---- minCostBtwIndex 入参 tgtN = 4 preIndex = 0 ----
+INFO: 2022-02-18 22:39:32 783 ---- minCostOverIndex 入参 tgtN = 4 preIndex = 0 ----
+INFO: 2022-02-18 22:39:32 785 	4 cost= 900.0
+INFO: 2022-02-18 22:39:32 787 ---- minCostBtwIndex 入参 tgtN = 6 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 790 ---- minCostOverIndex 入参 tgtN = 6 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 791 	6 cost= 1140.0
+INFO: 2022-02-18 22:39:32 793 ---- minCostBtwIndex 入参 tgtN = 7 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 794 ---- minCostOverIndex 入参 tgtN = 7 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 795 ---- minCostOverIndex 入参 tgtN = 4 preIndex = 0 ----
+INFO: 2022-02-18 22:39:32 795 	7 cost= 1470.0
+INFO: 2022-02-18 22:39:32 796 ---- minCostBtwIndex 入参 tgtN = 8 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 797 ---- minCostOverIndex 入参 tgtN = 8 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 803 ---- minCostOverIndex 入参 tgtN = 5 preIndex = 0 ----
+INFO: 2022-02-18 22:39:32 805 	8 cost= 1470.0
+INFO: 2022-02-18 22:39:32 807 	--> base key = 1 DivideBundle(orderN=1, totalPrice=570.0, divArray=[1, 0, 0])
+INFO: 2022-02-18 22:39:32 808 	--> base key = 2 DivideBundle(orderN=2, totalPrice=570.0, divArray=[1, 0, 0])
+INFO: 2022-02-18 22:39:32 809 	--> base key = 3 DivideBundle(orderN=3, totalPrice=570.0, divArray=[1, 0, 0])
+INFO: 2022-02-18 22:39:32 810 	--> base key = 4 DivideBundle(orderN=4, totalPrice=900.0, divArray=[0, 1, 0])
+INFO: 2022-02-18 22:39:32 811 	--> base key = 5 DivideBundle(orderN=5, totalPrice=900.0, divArray=[0, 1, 0])
+INFO: 2022-02-18 22:39:32 812 	--> base key = 6 DivideBundle(orderN=6, totalPrice=1140.0, divArray=[2, 0, 0])
+INFO: 2022-02-18 22:39:32 813 	--> base key = 7 DivideBundle(orderN=7, totalPrice=1470.0, divArray=[1, 1, 0])
+INFO: 2022-02-18 22:39:32 814 	--> base key = 8 DivideBundle(orderN=8, totalPrice=1470.0, divArray=[1, 1, 0])
+INFO: 2022-02-18 22:39:32 815 	--> base key = 9 DivideBundle(orderN=9, totalPrice=1530.0, divArray=[0, 0, 1])
+INFO: 2022-02-18 22:39:32 838 ---- getTotalCost 收到订单：VID - 13 件
+INFO: 2022-02-18 22:39:32 840 ---- minCostOverIndex 入参 tgtN = 13 preIndex = 2 ----
+INFO: 2022-02-18 22:39:32 843 ---- minCostOverIndex 入参 tgtN = 8 preIndex = 1 ----
+INFO: 2022-02-18 22:39:32 844 ---- minCostOverIndex 入参 tgtN = 5 preIndex = 0 ----
