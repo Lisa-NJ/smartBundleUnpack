@@ -31,11 +31,11 @@ smartBundleUnpack
         │   └── java （7）
         │       └── bundleUnpack
         │                 ├── App.java          （7-1）
-        │                 ├── Bundle.java				（7-2）
-        │                 ├── BundleS.java			（7-3）
-        │                 ├── DivideBundle.java	（7-4）
-        │                 ├── MyFormat.java			（7-5）
-        │                 └── NumPrice.java			（7-6）
+        │                 ├── Bundle.java       （7-2）
+        │                 ├── BundleS.java      （7-3）
+        │                 ├── DivideBundle.java （7-4）
+        │                 ├── MyFormat.java     （7-5）
+        │                 └── NumPrice.java     （7-6）
         └── test
             └── java （8）
                 └── bundleUnpack
@@ -98,10 +98,10 @@ INFO: 2022-02-19 10:10:49 517 		1 * 9 ~ 1147.5
 
 ```
  │       └── bundleUnpack
-                 ├── App.java          （7-1） 定义 main 函数，程序运行入口        
-                 ├── BundleS.java			 （7-3） 读取配置文件，初始化，提供下单接口
-                 ├── Bundle.java			 （7-2） 对某种商品的处理
-                 ├── MyFormat.java		 （7-5） 设置日志打印形式
+                 ├── App.java     （7-1） 定义 main 函数，程序运行入口        
+                 ├── BundleS.java （7-3） 读取配置文件，初始化，提供下单接口
+                 ├── Bundle.java  （7-2） 对某种商品的处理
+                 ├── MyFormat.java（7-5） 设置日志打印形式
                  ├── 其他基础数据类定义
 ```
 
@@ -127,7 +127,7 @@ BUILD SUCCESSFUL in 1s
 ├── log          （6）
     └── src
         └── logBundleFLAC.log
-				├── logBundleIMG.log
+        ├── logBundleIMG.log
         ├── logBundleVID.log
         └── logOrder.log
 ```
