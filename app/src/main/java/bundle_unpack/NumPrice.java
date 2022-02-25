@@ -1,15 +1,11 @@
 package bundle_unpack;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-
+@Data
+@AllArgsConstructor
 public class NumPrice {
-    @Getter @Setter private int num;
-    @Getter @Setter private double price;
-
-    NumPrice(int n, double p){
-        num = n;
-        price = p;
-    }
+    private int num;
+    private double price;
 }

@@ -1,14 +1,11 @@
 package bundle_unpack;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-
+@Data
+@AllArgsConstructor
 public class OrderItem {
-    @Getter @Setter private String type;
-    @Getter @Setter private int num;
-    OrderItem(String type1, int num1){
-        type = type1;
-        num = num1;
-    }
+    private String type;
+    private int num;
 }

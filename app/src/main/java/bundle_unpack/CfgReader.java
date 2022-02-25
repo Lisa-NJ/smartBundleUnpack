@@ -10,9 +10,6 @@ public class CfgReader {
     
     //get order info from file orderInfo.cfg
     public Order readOrder(){
-        
-        Order order = new Order();      
-
         List<OrderItem> itemList = new ArrayList<OrderItem>();
 
         try {
@@ -35,7 +32,7 @@ public class CfgReader {
             e.printStackTrace();
         }
 
-        order.setItemList(itemList);
+        Order order = new Order(itemList);
 
         return order;
     }

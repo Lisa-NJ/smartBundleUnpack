@@ -2,18 +2,18 @@ package bundle_unpack;
 
 import java.util.*;
 import java.util.ArrayList;
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-
-//one brand of bundle process class
+@Data
+@AllArgsConstructor
 public class Bundle {
-    @Getter @Setter private String typeB = "DIV";
-    @Getter @Setter private ArrayList<NumPrice> bundles;
+    private String typeB = "DIV";
+    private ArrayList<NumPrice> bundles;
     private boolean initFlg = false;
 
-    @Getter @Setter private int nofSizes = 0;
+    private int nofSizes = 0;
 
     // orderNum - cost & breakdown base infomation
     private Map<Integer, BundleBreakdown> baseMinBdNumMap;

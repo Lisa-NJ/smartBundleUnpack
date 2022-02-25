@@ -1,14 +1,16 @@
 package bundle_unpack;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class BundleBreakdown {
-    @Getter @Setter private String type;
-    @Getter @Setter private int orderN;
-    @Getter @Setter private double totalPrice;
-    @Getter @Setter private int totalNum;
-    @Getter @Setter private int[] divArray;
+    private String type;
+    private int orderN;
+    private double totalPrice;
+    private int totalNum;
+    private int[] divArray;
 
     public BundleBreakdown(int length) {
         divArray = new int[length];

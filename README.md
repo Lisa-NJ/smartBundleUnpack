@@ -1,17 +1,18 @@
 #### What is this for?
 
-Given a brands order, determine the cost and bundle breakdown for each
-submission format. Bundles： 
+Given a brands order, determine the cost and bundle breakdown for each submission format. 
 
-IMG 5 @ $450 10 @ $800 
+Bundles： 
 
-FLAC 3 @ $427.50 6 @ $810 9 @ $1147.50 
+​				IMG 5 @ $450 10 @ $800 
 
-VID 3 @ $570 5 @ $900 9 @ $1530
+​				FLAC 3 @ $427.50 6 @ $810 9 @ $1147.50 
+
+​				VID 3 @ $570 5 @ $900 9 @ $1530
 
 
 
-Input： IMG 10 15 FLAC 15 VID 13
+Input： 	IMG 10 15 FLAC 15 VID 13
 
 Output：10 IMG $800 -- 1 x 10 $800 
 
@@ -21,7 +22,7 @@ Output：10 IMG $800 -- 1 x 10 $800
 
 #### How to use
 
-Download the project to your computer，and you can see the folder smartBundleUnpack。
+Download the project to your computer，and you can see the folder smartBundleUnpack.
 
 The file cfg/Order.cfg is used for the order information, and it can be changed as needed;
 
@@ -41,13 +42,17 @@ Check smartBundleUnpack/app/log，and you can see the following files. ：
 
 ```
 ├── log          （6）
-			└── logBundleProcess.log
-      └── BreakdownPlan.log
+		└── logBundleProcess.log
+		└── BreakdownPlan.log
 ```
 
 BreakdownPlan.log is the answer to the given order.
 
-#### How it is worked out
+#### How is it worked out
+
+Let's take bunle fomat 'VID 3 @ $570 5 @ $900 9 @ $1530' as an example. 
+
+If an order number is received, let's say it is targetNumber.
 
 
 

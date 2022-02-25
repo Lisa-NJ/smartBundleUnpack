@@ -1,9 +1,11 @@
 package bundle_unpack;
 
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@Data
+@AllArgsConstructor
 public class Order {
-    @Getter @Setter private List<OrderItem> itemList ;
+    private List<OrderItem> itemList ;
 }
