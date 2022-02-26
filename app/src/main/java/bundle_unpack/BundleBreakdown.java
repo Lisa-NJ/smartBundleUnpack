@@ -8,8 +8,8 @@ import lombok.Data;
 public class BundleBreakdown {
     private String type;
     private int orderN;
-    private double totalPrice;
     private int totalNum;
+    private double totalPrice;
     private int[] divArray;
 
     public BundleBreakdown(int length) {

@@ -88,13 +88,13 @@ First, initialise the base data and work out the total number and breakdown plan
    	9 MaxS                    9                            0,0,1
    ```
 
-Second, if an order number is received and it is not bigger than MaxS, return the result from the base data; however, if an order number is bigger than MaxS, the total number falls into these two number, suppose MaxS2 is the seccond biggest number of bundle sizes:
+Second, if an order number is received, and it is not bigger than MaxS, return the result from the base data; however, if an order number is bigger than MaxS, the total number falls into these two number, suppose MaxS2 is the second biggest number of bundle sizes:
 
 The first number = MaxS + total number with new order number being order number less by MaxS;
 
 The second number = MaxS2 + total number with new order number being  order number less by MaxS2 and new budle sizes being old bundle sizes without MaxS;
 
-Then return the minimun of them.
+Then return the minimum of them.
 
 #### Dependencies
 

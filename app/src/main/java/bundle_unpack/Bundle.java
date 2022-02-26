@@ -46,14 +46,7 @@ public class Bundle {
         // {{3, 570},{5, 900},{9, 1530}};
         for (int i = 0; i < nPriceS.length; i++) {
             bundles.add(new NumPrice(nPriceS[i].getNum(), nPriceS[i].getPrice()));
-
         }
-
-        int num = initBaseNum();
-        if (num > 0)
-            initFlg = true;
-        else
-            initFlg = false;
     }
 
     private BundleBreakdown minNumBtwIndex(int targetNum, int preIndex) {
@@ -103,6 +96,7 @@ public class Bundle {
             curBreakdownBd1.setTotalNum(option1);
             
             curBreakdownBd1.addDivArray(gapBundle1.getDivArray());
+            logger.info("option1 = " + curBreakdownBd1);
 
             //-----------------------------------------------
             //Option2: take one second max size
@@ -120,11 +114,13 @@ public class Bundle {
             curBreakdownBd2.setTotalNum(option2);
             //curBreakdownBd2 的 divArray += gapBundle2 对应的 分包 数据
             curBreakdownBd2.addDivArray(gapBundle2.getDivArray());
+            logger.info("option2 = " + curBreakdownBd2);
 
             //--------------------------------------------------
             //if option1==option2, go for option1 -- option1 has used bigger bundles
             curBreakdown.setTotalNum(option1 <= option2 ? option1 : option2);
             curBreakdown.setDivArray(option1 <= option2 ? curBreakdownBd1.getDivArray() : curBreakdownBd2.getDivArray());
+            logger.info("min = " + (option1 <= option2 ? option1 : option2));
 
             return curBreakdown;
         }
@@ -154,7 +150,7 @@ public class Bundle {
     }
 
     private int initBaseNum() {
-        logger.info("initBaseNum");
+        logger.info("initBaseNum, type = " + getTypeB());
         baseMinBdNumMap = new HashMap<Integer, BundleBreakdown>();
 
         int l = getNofSizes();
@@ -202,10 +198,10 @@ public class Bundle {
         }
         // if l==1，no action needed
 
+        logger.info(baseMinBdNumMap.toString());
+
         assert (baseMinBdNumMap.size() == maxSize);
         initFlg = true;
         return baseMinBdNumMap.size();
     }
-
-
 }

@@ -13,6 +13,4 @@ public class AppTest {
         assertEquals(classUnderTest.readBundleFormat().size(), 3);
         assertEquals(classUnderTest.readOrder().getItemList().size(), 5);
     }
-
-
 }
