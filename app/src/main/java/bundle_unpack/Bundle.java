@@ -2,7 +2,10 @@ package bundle_unpack;
 
 import java.util.*;
 import java.util.ArrayList;
-
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,13 +17,28 @@ public class Bundle {
     private boolean initFlg = false;
 
     private int nofSizes = 0;
-
+    private Logger logger;
     // orderNum - cost & breakdown base infomation
     private Map<Integer, BundleBreakdown> baseMinBdNumMap;
+
+    private void initLogger(){
+        logger = Logger.getLogger("LoggerLog");
+        logger.setLevel(Level.INFO);
+        try {
+            //add fileHandler
+            FileHandler fileHandler = new FileHandler("log/process.log");
+            fileHandler.setLevel(Level.INFO);
+            fileHandler.setFormatter(new DateTimeFormat());
+            logger.addHandler(fileHandler);
+        } catch (SecurityException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public Bundle(String t, NumPrice[] nPriceS) {
         setTypeB(t);
         setNofSizes(nPriceS.length);
+        initLogger();
 
         bundles = new ArrayList<NumPrice>();
 
@@ -39,6 +57,7 @@ public class Bundle {
     }
 
     private BundleBreakdown minNumBtwIndex(int targetNum, int preIndex) {
+        logger.info("minNumBtwIndex targetNum = " + targetNum + " preIndex = " + preIndex);
         BundleBreakdown curBreakdown = new BundleBreakdown(getNofSizes());
 
         curBreakdown.setType(getTypeB());
@@ -60,7 +79,7 @@ public class Bundle {
     }
 
     private BundleBreakdown minNumOverIndex(int targetNum, int preIndex) {
-    
+        logger.info("minNumOverIndex targetNum = " + targetNum + " preIndex = " + preIndex);
         BundleBreakdown curBreakdown = new BundleBreakdown(getNofSizes());
 
         curBreakdown.setType(getTypeB());
@@ -121,6 +140,7 @@ public class Bundle {
     }
 
     public BundleBreakdown calBreakdown(int targetN) {
+        logger.info("calBreakdown targetNum = " + targetN);
         if (!initFlg) {
             initBaseNum();
         }
@@ -134,6 +154,7 @@ public class Bundle {
     }
 
     private int initBaseNum() {
+        logger.info("initBaseNum");
         baseMinBdNumMap = new HashMap<Integer, BundleBreakdown>();
 
         int l = getNofSizes();
