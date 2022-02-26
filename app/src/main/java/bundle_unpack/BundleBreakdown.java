@@ -3,6 +3,8 @@ package bundle_unpack;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+
 @Data
 @AllArgsConstructor
 public class BundleBreakdown {
@@ -28,4 +30,11 @@ public class BundleBreakdown {
         divArray[i] = v;
     }
 
+    public double calTotalPrice(ArrayList<NumPrice> npArray){
+        setTotalPrice(0);
+        for(int i=0; i<divArray.length; i++){
+            totalPrice += npArray.get(i).getPrice() * divArray[i];
+        }
+        return totalPrice;
+    }
 }

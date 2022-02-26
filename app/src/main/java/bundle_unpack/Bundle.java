@@ -68,6 +68,7 @@ public class Bundle {
             curBreakdown.setDivArray(breakdown2.getDivArray());
         }
 
+        curBreakdown.calTotalPrice(bundles);
         return curBreakdown;
     }
 
@@ -122,6 +123,8 @@ public class Bundle {
             curBreakdown.setDivArray(option1 <= option2 ? curBreakdownBd1.getDivArray() : curBreakdownBd2.getDivArray());
             logger.info("min = " + (option1 <= option2 ? option1 : option2));
 
+            curBreakdown.calTotalPrice(bundles);
+
             return curBreakdown;
         }
 
@@ -131,6 +134,8 @@ public class Bundle {
         nNeeded += leftN>0 ? 1 : 0;
         curBreakdown.setTotalNum(preSize * nNeeded);
         curBreakdown.setArrayItem(preIndex, nNeeded);
+
+        curBreakdown.calTotalPrice(bundles);
 
         return curBreakdown;
     }
@@ -164,6 +169,7 @@ public class Bundle {
             curBundle.setOrderN(bundles.get(i).getNum());
             curBundle.setTotalNum(bundles.get(i).getNum());
             curBundle.setArrayItem(i, 1);
+            curBundle.calTotalPrice(bundles);
             baseMinBdNumMap.put(bundles.get(i).getNum(), curBundle);
         }
 
@@ -175,6 +181,7 @@ public class Bundle {
             curBundle.setOrderN(curOrder);
             curBundle.setTotalNum(bundles.get(0).getNum());
             curBundle.setArrayItem(0, 1);
+            curBundle.calTotalPrice(bundles);
             baseMinBdNumMap.put(curOrder, curBundle);
         }
 
@@ -191,6 +198,7 @@ public class Bundle {
                         nextSize = bundles.get(preIndex + 1).getNum();
                     }
                     BundleBreakdown minBdTotal = minNumBtwIndex(curN, preIndex);
+                    minBdTotal.calTotalPrice(bundles);
                     baseMinBdNumMap.put(curN, minBdTotal);
                 }
                 curN++;

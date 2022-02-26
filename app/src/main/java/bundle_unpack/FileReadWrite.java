@@ -116,7 +116,7 @@ public class FileReadWrite {
         System.out.println("--- Bundle breakdown Info ----");
         for(int i=0; i<outputBD.size(); i++){
             BundleBreakdown tmpBdBreakdown = outputBD.get(i);
-            System.out.println(tmpBdBreakdown.getType() + " " + tmpBdBreakdown.getOrderN() + " ~ " + tmpBdBreakdown.getTotalNum() + " :");
+            System.out.println(tmpBdBreakdown.getType() + " " + tmpBdBreakdown.getOrderN() + " ~ " + tmpBdBreakdown.getTotalNum() + " total cost = " + tmpBdBreakdown.getTotalPrice() +" :");
             for(int j=0; j< tmpBdBreakdown.getDivArray().length; j++)    {
                 System.out.println("\t" + tmpBdBreakdown.getDivArray()[j]);
             }
