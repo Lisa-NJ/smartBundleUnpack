@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CfgReader {
+public class FileReadWrite {
     
     //get order info from file orderInfo.cfg
     public Order readOrder(){
@@ -104,4 +104,24 @@ public class CfgReader {
         
         return bundleCalMap;
     }
+
+    public void printOrderResult(Order order, ArrayList<BundleBreakdown> outputBD){
+        //output --> breakdownPlan.log
+        System.out.println("--- Order Info ----");
+        for(int i=0; i<order.getItemList().size(); i++){
+            OrderItem item = order.getItemList().get(i);
+            System.out.println(item.getType() + " " + item.getNum());
+        }
+
+        System.out.println("--- Bundle breakdown Info ----");
+        for(int i=0; i<outputBD.size(); i++){
+            BundleBreakdown tmpBdBreakdown = outputBD.get(i);
+            System.out.println(tmpBdBreakdown.getType() + " " + tmpBdBreakdown.getOrderN() + " ~ " + tmpBdBreakdown.getTotalNum() + " :");
+            for(int j=0; j< tmpBdBreakdown.getDivArray().length; j++)    {
+                System.out.println("\t" + tmpBdBreakdown.getDivArray()[j]);
+            }
+        }
+
+    }
+
 }
