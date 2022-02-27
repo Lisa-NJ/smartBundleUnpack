@@ -30,6 +30,7 @@ public class Bundle {
             fileHandler.setLevel(Level.INFO);
             fileHandler.setFormatter(new DateTimeFormat());
             logger.addHandler(fileHandler);
+            logger.setUseParentHandlers(false);
         } catch (SecurityException | IOException e) {
             e.printStackTrace();
         }
