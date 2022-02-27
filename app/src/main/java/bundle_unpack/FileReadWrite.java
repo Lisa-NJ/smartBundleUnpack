@@ -90,7 +90,7 @@ public class FileReadWrite {
 
                 System.out.println(str);
 
-                // 解析 当前行 字符串 为：类型 + <包裹大小, 价格> 的形式
+                // parse current line into ：type + <bundleSize, price> 的形式
                 Bundle bd = parseOneBdFormat(str);
                 if (bd != null) {    
                     bundleCalMap.put(bd.getTypeB(), bd);
@@ -106,22 +106,28 @@ public class FileReadWrite {
     }
 
     public void printOrderResult(Order order, ArrayList<BundleBreakdown> outputBD){
-        //output --> breakdownPlan.log
-        System.out.println("--- Order Info ----");
-        for(int i=0; i<order.getItemList().size(); i++){
-            OrderItem item = order.getItemList().get(i);
-            System.out.println(item.getType() + " " + item.getNum());
-        }
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter("log/breakdownPlan.log"));
 
-        System.out.println("--- Bundle breakdown Info ----");
-        for(int i=0; i<outputBD.size(); i++){
-            BundleBreakdown tmpBdBreakdown = outputBD.get(i);
-            System.out.println(tmpBdBreakdown.getType() + " " + tmpBdBreakdown.getOrderN() + " ~ " + tmpBdBreakdown.getTotalNum() + " total cost = " + tmpBdBreakdown.getTotalPrice() +" :");
-            for(int j=0; j< tmpBdBreakdown.getDivArray().length; j++)    {
-                System.out.println("\t" + tmpBdBreakdown.getDivArray()[j]);
+            out.write("\n\t--- Order Info ----");
+            for(int i=0; i<order.getItemList().size(); i++){
+                OrderItem item = order.getItemList().get(i);
+                out.write("\n\t" + item.getType() + " " + item.getNum());
             }
-        }
 
+            out.write("\n\n\t---- Bundle breakdown Info ----");
+            for(int i=0; i<outputBD.size(); i++){
+                BundleBreakdown tmpBdBreakdown = outputBD.get(i);
+                out.write("\n\t" + tmpBdBreakdown.getOrderType() + " " + tmpBdBreakdown.getOrderNumber() + " ~ " + tmpBdBreakdown.getTotalNumber() + " total cost = " + tmpBdBreakdown.getTotalPrice() +" :\n");
+                for(int j=0; j< tmpBdBreakdown.getSolution().length; j++)    {
+                    out.write("\t" + tmpBdBreakdown.getSolution()[j]);
+                }
+            }
+
+            out.close();
+
+        } catch (IOException e) {
+        }
     }
 
 }

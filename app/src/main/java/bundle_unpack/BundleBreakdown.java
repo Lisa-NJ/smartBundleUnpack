@@ -8,32 +8,32 @@ import java.util.ArrayList;
 @Data
 @AllArgsConstructor
 public class BundleBreakdown {
-    private String type;
-    private int orderN;
-    private int totalNum;
+    private String orderType;
+    private int orderNumber;
+    private int totalNumber;
     private double totalPrice;
-    private int[] divArray;
+    private int[] solution;
 
     public BundleBreakdown(int length) {
-        divArray = new int[length];
+        solution = new int[length];
     }
 
-    public int[] addDivArray(int[] inArray) {
-        for (int i = 0; i < divArray.length; i++) {
-            divArray[i] += inArray[i];
+    public int[] addSolution(int[] inArray) {
+        for (int i = 0; i < solution.length; i++) {
+            solution[i] += inArray[i];
         }
 
-        return divArray;
+        return solution;
     }
 
     public void setArrayItem(int i, int v){
-        divArray[i] = v;
+        solution[i] = v;
     }
 
     public double calTotalPrice(ArrayList<NumPrice> npArray){
         setTotalPrice(0);
-        for(int i=0; i<divArray.length; i++){
-            totalPrice += npArray.get(i).getPrice() * divArray[i];
+        for(int i=0; i<solution.length; i++){
+            totalPrice += npArray.get(i).getPrice() * solution[i];
         }
         return totalPrice;
     }
