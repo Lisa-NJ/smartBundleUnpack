@@ -2,10 +2,6 @@ package bundle_unpack;
 
 import java.util.*;
 import java.util.ArrayList;
-import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,7 +13,7 @@ public class Bundle {
     private boolean initFlg = false;
 
     private int nofSizes = 0;
-    // OrderNumum - cost & breakdown base infomation
+    // OrderNumber - cost & breakdown base information
     private Map<Integer, BundleBreakdown> baseMinBdNumMap;
 
     public Bundle(String t, NumPrice[] nPriceS) {

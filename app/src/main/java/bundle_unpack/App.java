@@ -8,44 +8,12 @@ import java.util.Map;
 
 public class App {
     public static void main(String[] args) {
-
         FileReadWrite rwTool = new FileReadWrite();
         Map<String, Bundle> bundleCalMap = rwTool.readBundleFormat();
-      
         //get order info 
         Order order = rwTool.readOrder();
-
-        ArrayList<BundleBreakdown> outputBD = placeOrder(order, bundleCalMap);
-
+        BundleProcess process = new BundleProcess();
+        ArrayList<BundleBreakdown> outputBD = process.placeOrder(order, bundleCalMap);
         rwTool.printOrderResult(order, outputBD);
     }
-
-
-    public static ArrayList<BundleBreakdown> placeOrder(Order order, Map<String, Bundle> bundleCalMap) {
-        ArrayList<BundleBreakdown> breakdownList = new ArrayList<>();
-
-        for (int i = 0; i < order.getItemList().size(); i++) {
-            BundleBreakdown curBreakdown = processOrder(order.getItemList().get(i).getType(), order.getItemList().get(i).getNum(), bundleCalMap);
-            breakdownList.add(curBreakdown);
-        }
-
-        return breakdownList;
-    }
-    
-    private static BundleBreakdown processOrder(String type, int targetNum, Map<String, Bundle> bundleCalMap) {
-        if (targetNum < 1) {
-            return null;
-        }
-
-        if (bundleCalMap.containsKey(type)) {
-            Bundle bundleCal = bundleCalMap.get(type);
-            BundleBreakdown ddB = bundleCal.calBreakdown(targetNum);
-
-            return ddB;
-        }
-
-        return null;
-    }
-
-    
 }

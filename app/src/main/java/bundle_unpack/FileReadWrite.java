@@ -82,14 +82,10 @@ public class FileReadWrite {
     {
         Map<String, Bundle> bundleCalMap = new HashMap<String, Bundle>();
         try {
-
             BufferedReader in = new BufferedReader(new FileReader("cfg/bundleFormat.cfg"));
             String str;
         
             while ((str = in.readLine()) != null) {
-
-                System.out.println(str);
-
                 // parse current line into ：type + <bundleSize, price> 的形式
                 Bundle bd = parseOneBdFormat(str);
                 if (bd != null) {    
