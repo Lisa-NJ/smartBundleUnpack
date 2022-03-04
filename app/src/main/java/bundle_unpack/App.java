@@ -3,7 +3,7 @@
  */
 package bundle_unpack;
 
-import java.util.List;
+
 import java.util.Map;
 
 public class App {
@@ -13,7 +13,7 @@ public class App {
         //get order info 
         Order order = rwTool.readOrder();
         BundleProcess process = new BundleProcess();
-        List<BundleBreakdown> outputBD = process.placeOrder(order, bundleCalMap);
+        OrderResult outputBD = process.placeOrder(order, bundleCalMap);
         rwTool.printOrderResult(order, outputBD);
     }
 }

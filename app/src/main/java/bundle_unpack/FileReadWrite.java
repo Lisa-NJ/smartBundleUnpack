@@ -101,7 +101,7 @@ public class FileReadWrite {
         return bundleCalMap;
     }
 
-    public void printOrderResult(Order order, List<BundleBreakdown> outputBD){
+    public void printOrderResult(Order order, OrderResult outputBD){
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("log/breakdownPlan.log"));
 
@@ -112,8 +112,8 @@ public class FileReadWrite {
             }
 
             out.write("\n\n\t---- Bundle breakdown Info ----");
-            for(int i=0; i<outputBD.size(); i++){
-                BundleBreakdown tmpBdBreakdown = outputBD.get(i);
+            for(int i=0; i<outputBD.getList().size(); i++){
+                BundleBreakdown tmpBdBreakdown = outputBD.getList().get(i);
                 out.write("\n\t" + tmpBdBreakdown.getOrderType() + " " + tmpBdBreakdown.getOrderNumber() + " ~ " + tmpBdBreakdown.getTotalNumber() + " total cost = " + tmpBdBreakdown.getTotalPrice() +" :\n");
                 for(int j=0; j< tmpBdBreakdown.getSolution().length; j++)    {
                     out.write("\t" + tmpBdBreakdown.getSolution()[j]);
