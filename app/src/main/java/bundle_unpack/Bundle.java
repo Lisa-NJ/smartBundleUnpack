@@ -1,12 +1,17 @@
 package bundle_unpack;
 
-import java.util.*;
-import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
+@Log4j2
 public class Bundle {
     private String typeB = "DIV";
     private ArrayList<NumPrice> bundles;
@@ -19,17 +24,15 @@ public class Bundle {
     public Bundle(String t, NumPrice[] nPriceS) {
         setTypeB(t);
         setNofSizes(nPriceS.length);
-        bundles = new ArrayList<NumPrice>();
+        bundles = new ArrayList<>();
 
         // add given bundle item
         // {{3, 570},{5, 900},{9, 1530}};
-        for (int i = 0; i < nPriceS.length; i++) {
-            bundles.add(new NumPrice(nPriceS[i].getNum(), nPriceS[i].getPrice()));
-        }
+        Arrays.stream(nPriceS).forEach(np->bundles.add(new NumPrice(np.getNum(), np.getPrice())));
     }
 
     private BundleBreakdown minNumBtwIndex(int targetNum, int preIndex) {
-        Log.logger.info("minNumBtwIndex targetNum = " + targetNum + " preIndex = " + preIndex);
+        log.info("minNumBtwIndex targetNum = " + targetNum + " preIndex = " + preIndex);
         BundleBreakdown curBreakdown = new BundleBreakdown(getNofSizes());
 
         curBreakdown.setOrderType(getTypeB());
@@ -52,7 +55,7 @@ public class Bundle {
     }
 
     private BundleBreakdown minNumOverIndex(int targetNum, int preIndex) {
-        Log.logger.info("minNumOverIndex targetNum = " + targetNum + " preIndex = " + preIndex);
+        log.info("minNumOverIndex targetNum = " + targetNum + " preIndex = " + preIndex);
         BundleBreakdown curBreakdown = new BundleBreakdown(getNofSizes());
 
         curBreakdown.setOrderType(getTypeB());
@@ -76,13 +79,12 @@ public class Bundle {
             curBreakdownBd1.setTotalNumber(option1);
             
             curBreakdownBd1.addSolution(gapBundle1.getSolution());
-            Log.logger.info("option1 = " + curBreakdownBd1);
+            log.info("option1 = " + curBreakdownBd1);
 
             //-----------------------------------------------
             //Option2: take one second max size
-            int preSize2 = bundles.get(preIndex-1).getNum();            
-            int preNum2 = bundles.get(preIndex-1).getNum();
-            int option2 = preNum2;
+            int preSize2 = bundles.get(preIndex-1).getNum();
+            int option2 = bundles.get(preIndex-1).getNum();
             BundleBreakdown curBreakdownBd2 = new BundleBreakdown(getNofSizes());
             curBreakdownBd2.setOrderNumber(targetNum);
             curBreakdownBd2.setArrayItem(preIndex-1, 1);
@@ -94,13 +96,13 @@ public class Bundle {
             curBreakdownBd2.setTotalNumber(option2);
             //curBreakdownBd2 的 solution += gapBundle2 对应的 分包 数据
             curBreakdownBd2.addSolution(gapBundle2.getSolution());
-            Log.logger.info("option2 = " + curBreakdownBd2);
+            log.info("option2 = " + curBreakdownBd2);
 
             //--------------------------------------------------
             //if option1==option2, go for option1 -- option1 has used bigger bundles
-            curBreakdown.setTotalNumber(option1 <= option2 ? option1 : option2);
+            curBreakdown.setTotalNumber(Math.min(option1, option2));
             curBreakdown.setSolution(option1 <= option2 ? curBreakdownBd1.getSolution() : curBreakdownBd2.getSolution());
-            Log.logger.info("min = " + (option1 <= option2 ? option1 : option2));
+            log.info("min = " + Math.min(option1, option2));
 
             curBreakdown.calTotalPrice(bundles);
 
@@ -120,7 +122,7 @@ public class Bundle {
     }
 
     public BundleBreakdown calBreakdown(int targetN) {
-        Log.logger.info("calBreakdown targetNum = " + targetN);
+        log.info("calBreakdown targetNum = " + targetN);
         if (!initFlg) {
             initBaseNum();
         }
@@ -134,14 +136,13 @@ public class Bundle {
     }
 
     private int initBaseNum() {
-        Log.logger.info("initBaseNum, type = " + getTypeB());
-        baseMinBdNumMap = new HashMap<Integer, BundleBreakdown>();
-
+        log.info("initBaseNum, type = " + getTypeB());
+        baseMinBdNumMap = new HashMap<>();
         int l = getNofSizes();
 
         assert (l >= 1);
 
-        // 1：if OrderNumum == bundles(i).num, curBuddleNum = 1
+        // 1：if OrderNum == bundles(i).num, curBundleNum = 1
         for (int i = 0; i < l; i++) {
             BundleBreakdown curBundle = new BundleBreakdown(l);
             curBundle.setOrderType(getTypeB());
@@ -152,7 +153,7 @@ public class Bundle {
             baseMinBdNumMap.put(bundles.get(i).getNum(), curBundle);
         }
 
-        // 2：if OrderNumum < bundles(0).num, curBuddleNum = 1
+        // 2：if OrderNum < bundles(0).num, curBundleNum = 1
         int minSize = bundles.get(0).getNum();
         for (int curOrder = 1; curOrder < minSize; curOrder++) {
             BundleBreakdown curBundle = new BundleBreakdown(getNofSizes());
@@ -164,7 +165,7 @@ public class Bundle {
             baseMinBdNumMap.put(curOrder, curBundle);
         }
 
-        // OrderNumum != bundles(n).num && OrderNumum > MinS && OrderNumum < MaxS
+        // OrderNum != bundles(n).num && OrderNum > MinS && OrderNum < MaxS
         int maxSize = bundles.get(l - 1).getNum();
         if (l >= 2) {
             int curN = minSize + 1;
@@ -185,7 +186,7 @@ public class Bundle {
         }
         // if l==1，no action needed
 
-        Log.logger.info(baseMinBdNumMap.toString());
+        log.info(baseMinBdNumMap.toString());
 
         assert (baseMinBdNumMap.size() == maxSize);
         initFlg = true;
