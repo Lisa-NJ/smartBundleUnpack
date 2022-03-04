@@ -3,7 +3,7 @@ package bundle_unpack;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,11 +14,7 @@ public class BundleBreakdown {
     private double totalPrice;
     private int[] solution;
 
-    public BundleBreakdown(int length) {
-        solution = new int[length];
-    }
-
-    public int[] addSolution(int[] inArray) {
+    public int[] combineSolution(int[] inArray) {
         for (int i = 0; i < solution.length; i++) {
             solution[i] += inArray[i];
         }
@@ -30,11 +26,12 @@ public class BundleBreakdown {
         solution[i] = v;
     }
 
-    public double calTotalPrice(ArrayList<NumPrice> npArray){
+    public double calTotalPrice(List<NumPrice> npArray){
         setTotalPrice(0);
         for(int i=0; i<solution.length; i++){
             totalPrice += npArray.get(i).getPrice() * solution[i];
         }
+
         return totalPrice;
     }
 }

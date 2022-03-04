@@ -1,6 +1,6 @@
 package bundle_unpack;
+
 import java.io.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,7 +101,7 @@ public class FileReadWrite {
         return bundleCalMap;
     }
 
-    public void printOrderResult(Order order, ArrayList<BundleBreakdown> outputBD){
+    public void printOrderResult(Order order, List<BundleBreakdown> outputBD){
         try {
             BufferedWriter out = new BufferedWriter(new FileWriter("log/breakdownPlan.log"));
 

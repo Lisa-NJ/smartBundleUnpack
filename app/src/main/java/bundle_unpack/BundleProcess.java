@@ -1,33 +1,22 @@
 package bundle_unpack;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BundleProcess {
-    public ArrayList<BundleBreakdown> placeOrder(Order order, Map<String, Bundle> bundleCalMap) {
-        ArrayList<BundleBreakdown> breakdownList = new ArrayList<>();
-
-        for (int i = 0; i < order.getItemList().size(); i++) {
-            BundleBreakdown curBreakdown = processOrder(order.getItemList().get(i).getType(), order.getItemList().get(i).getNum(), bundleCalMap);
-            breakdownList.add(curBreakdown);
-        }
-
-        return breakdownList;
+    public List<BundleBreakdown> placeOrder(Order order, Map<String, Bundle> bundleCalMap) {
+        return order.getItemList().stream()
+                .map(orderItem->processOrder(orderItem.getNum(), bundleCalMap.get(orderItem.getType())))
+                .collect(Collectors.toList());
     }
 
-    private BundleBreakdown processOrder(String type, int targetNum, Map<String, Bundle> bundleCalMap) {
-        if (targetNum < 1) {
+    private BundleBreakdown processOrder(int targetNum, Bundle bundle) {
+        if (targetNum < 1 || bundle==null) {
             return null;
         }
 
-        if (bundleCalMap.containsKey(type)) {
-            Bundle bundleCal = bundleCalMap.get(type);
-            BundleBreakdown ddB = bundleCal.calBreakdown(targetNum);
-
-            return ddB;
-        }
-
-        return null;
+        return bundle.calBreakdown(targetNum);
     }
 
 }
