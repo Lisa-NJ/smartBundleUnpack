@@ -22,13 +22,13 @@ public class BundleBreakdown {
         return solution;
     }
 
-    public void setArrayItem(int i, int v){
+    public void setArrayItem(int i, int v) {
         solution[i] = v;
     }
 
-    public double calTotalPrice(List<NumPrice> npArray){
+    public double calTotalPrice(List<NumPrice> npArray) {
         setTotalPrice(0);
-        for(int i=0; i<solution.length; i++){
+        for (int i = 0; i < solution.length; i++) {
             totalPrice += npArray.get(i).getPrice() * solution[i];
         }
 
