@@ -1,4 +1,4 @@
-package bundle_unpack;
+package com.ade.lisa.challenge.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

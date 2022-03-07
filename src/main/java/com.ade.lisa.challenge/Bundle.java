@@ -1,4 +1,4 @@
-package bundle_unpack;
+package com.ade.lisa.challenge;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,12 +10,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ade.lisa.challenge.model.NumPrice;
+import com.ade.lisa.challenge.model.BundleBreakdown;
+
 @Data
 @AllArgsConstructor
 @Log4j2
 public class Bundle {
     private String typeB = "DIV";
-    private List<NumPrice> bundles;
+    private final List<NumPrice> bundles;
     private boolean initFlg = false;
 
     private int nofSizes = 0;
@@ -29,7 +32,7 @@ public class Bundle {
 
         // add given bundle item
         // {{3, 570},{5, 900},{9, 1530}};
-        Arrays.stream(nPriceS).forEach(np->bundles.add(new NumPrice(np.getNum(), np.getPrice())));
+        Arrays.stream(nPriceS).forEach(np -> bundles.add(new NumPrice(np.getNum(), np.getPrice())));
     }
 
     private BundleBreakdown minNumBtwIndex(int targetNum, int preIndex) {
@@ -59,35 +62,34 @@ public class Bundle {
                 0, 0, new int[bundles.size()]);
 
         int preSize = bundles.get(preIndex).getNum();
-        
-        if(preIndex > 0)
-        {
-            //---------------------------------------------
+
+        if (preIndex > 0) {
+            //---------------------------- -----------------
             //Option1: take one maxSize
             int option1 = preSize;
             int l = bundles.size();
-            BundleBreakdown curBreakdownBd1 = new BundleBreakdown(getTypeB(), targetNum,0, 0, (new int[l]));
+            BundleBreakdown curBreakdownBd1 = new BundleBreakdown(getTypeB(), targetNum, 0, 0, (new int[l]));
             curBreakdownBd1.setArrayItem(preIndex, 1);
-            
+
             //1-1：if targetNum-preSize > preSize, gap = minNumOverIndex
             //1-2：if <=, gap is in base
-            BundleBreakdown gapBundle1 = targetNum-preSize > preSize ? minNumOverIndex(targetNum-preSize, preIndex) : baseMinBdNumMap.get(targetNum-preSize);
+            BundleBreakdown gapBundle1 = targetNum - preSize > preSize ? minNumOverIndex(targetNum - preSize, preIndex) : baseMinBdNumMap.get(targetNum - preSize);
             option1 += gapBundle1.getTotalNumber();
             curBreakdownBd1.setTotalNumber(option1);
-            
+
             curBreakdownBd1.combineSolution(gapBundle1.getSolution());
             log.info("option1 = " + curBreakdownBd1);
 
             //-----------------------------------------------
             //Option2: take one second max size
-            int preSize2 = bundles.get(preIndex-1).getNum();
-            int option2 = bundles.get(preIndex-1).getNum();
+            int preSize2 = bundles.get(preIndex - 1).getNum();
+            int option2 = bundles.get(preIndex - 1).getNum();
             BundleBreakdown curBreakdownBd2 = new BundleBreakdown(getTypeB(), targetNum, 0, 0, new int[l]);
-            curBreakdownBd2.setArrayItem(preIndex-1, 1);
-            
+            curBreakdownBd2.setArrayItem(preIndex - 1, 1);
+
             //2-1：if targetNum-preSize > preSize, similar to 1-1
             //2-2：if targetNum-preSize <= preSize, similar to 1-2
-            BundleBreakdown gapBundle2 = targetNum-preSize2 > preSize2 ? minNumOverIndex(targetNum-preSize2, preIndex-1) : baseMinBdNumMap.get(targetNum-preSize2);
+            BundleBreakdown gapBundle2 = targetNum - preSize2 > preSize2 ? minNumOverIndex(targetNum - preSize2, preIndex - 1) : baseMinBdNumMap.get(targetNum - preSize2);
             option2 += gapBundle2.getTotalNumber();
             curBreakdownBd2.setTotalNumber(option2);
             //curBreakdownBd2 的 solution += gapBundle2 对应的 分包 数据
@@ -104,11 +106,10 @@ public class Bundle {
 
             return curBreakdown;
         }
-
-        //preIndex==0, only one size of bundle available       
+        //preIndex==0, only one size of bundle available
         int nNeeded = targetNum / preSize;
         int leftN = targetNum % preSize;
-        nNeeded += leftN>0 ? 1 : 0;
+        nNeeded += leftN > 0 ? 1 : 0;
         curBreakdown.setTotalNumber(preSize * nNeeded);
         curBreakdown.setArrayItem(preIndex, nNeeded);
 
@@ -128,7 +129,7 @@ public class Bundle {
             return baseMinBdNumMap.get(targetN);
         }
 
-        return minNumOverIndex(targetN, bundles.size()-1);
+        return minNumOverIndex(targetN, bundles.size() - 1);
     }
 
     private int initBaseNum() {

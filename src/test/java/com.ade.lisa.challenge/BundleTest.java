@@ -1,9 +1,15 @@
-package bundle_unpack;
+package com.ade.lisa.challenge;
+
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+
+import com.ade.lisa.challenge.model.NumPrice;
+import com.ade.lisa.challenge.model.BundleBreakdown;
+
 
 public class BundleTest {
     String type = "IMG";

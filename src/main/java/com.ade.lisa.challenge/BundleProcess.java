@@ -1,7 +1,13 @@
-package bundle_unpack;
+package com.ade.lisa.challenge;
 
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.ade.lisa.challenge.model.OrderResult;
+import com.ade.lisa.challenge.model.Order;
+import com.ade.lisa.challenge.model.NumPrice;
+import com.ade.lisa.challenge.model.BundleBreakdown;
+
 
 public class BundleProcess {
     public OrderResult placeOrder(Order order, Map<String, Bundle> bundleCalMap) {

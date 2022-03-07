@@ -1,4 +1,4 @@
-package bundle_unpack;
+package com.ade.lisa.challenge.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class OrderResult {
-    private List<BundleBreakdown> list;
+    private final List<BundleBreakdown> list;
 }

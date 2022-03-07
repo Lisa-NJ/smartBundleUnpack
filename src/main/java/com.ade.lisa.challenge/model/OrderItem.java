@@ -1,4 +1,4 @@
-package bundle_unpack;
+package com.ade.lisa.challenge.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class OrderItem {
-    private String type;
-    private int num;
+    private final String type;
+    private final int num;
 }

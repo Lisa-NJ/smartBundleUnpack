@@ -39,5 +39,5 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'bundle_unpack.App'
+    mainClass = 'com.ade.lisa.challenge.App'
 }

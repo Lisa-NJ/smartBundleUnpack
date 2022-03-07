@@ -1,19 +1,24 @@
-package bundle_unpack;
+package com.ade.lisa.challenge;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.ade.lisa.challenge.model.OrderItem;
+import com.ade.lisa.challenge.model.Order;
+import com.ade.lisa.challenge.model.NumPrice;
+import com.ade.lisa.challenge.model.BundleBreakdown;
+import com.ade.lisa.challenge.model.OrderResult;
 
 public class FileReadWrite {
     
     //get order info from file orderInfo.cfg
     public Order readOrder(){
-        List<OrderItem> itemList = new ArrayList<OrderItem>();
+        List<OrderItem> itemList = new ArrayList<>();
 
         try {
-            String fileName = "cfg/orderInfo.cfg";;
+            String fileName = "orderInfo.cfg";
 
             BufferedReader in = new BufferedReader(new FileReader(fileName));
             String str;
@@ -32,18 +37,13 @@ public class FileReadWrite {
             e.printStackTrace();
         }
 
-        Order order = new Order(itemList);
-
-        return order;
+        return new Order(itemList);
     }
 
 
     OrderItem parseOneOrder(String strItem){
-        
         String[] parts = strItem.split(" ");
-        OrderItem item = new OrderItem(parts[0], Integer.parseInt(parts[1]));
-
-        return item;
+        return new OrderItem(parts[0], Integer.parseInt(parts[1]));
     }
         
     // IN：string like: IMG 5 @ $450 10 @ $800
@@ -71,20 +71,25 @@ public class FileReadWrite {
 
                 }
             }
-            Bundle bd = new Bundle(type, npS);
 
-            return bd;
+            return new Bundle(type, npS);
         }
         return null;
     }
 
     public Map<String, Bundle> readBundleFormat()
     {
-        Map<String, Bundle> bundleCalMap = new HashMap<String, Bundle>();
+        System.out.println(System.getProperty("user.dir"));
+        Map<String, Bundle> bundleCalMap = new HashMap<>();
         try {
-            BufferedReader in = new BufferedReader(new FileReader("cfg/bundleFormat.cfg"));
+            System.out.println(getClass().getClassLoader().getResource("bundleFormat.cfg"));
+
+
+
+            BufferedReader in = new BufferedReader(new FileReader("bundleFormat.cfg"));
             String str;
-        
+
+
             while ((str = in.readLine()) != null) {
                 // parse current line into ：type + <bundleSize, price> 的形式
                 Bundle bd = parseOneBdFormat(str);
@@ -123,6 +128,7 @@ public class FileReadWrite {
             out.close();
 
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
